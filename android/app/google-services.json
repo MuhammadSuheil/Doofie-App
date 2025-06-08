@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "871131262900",
+    "project_id": "doofie-7d819",
+    "storage_bucket": "doofie-7d819.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871131262900:android:f7398fa510a119e01ecce1",
+        "android_client_info": {
+          "package_name": "com.sumhel.doofie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871131262900-t0t9vihl3v6qe9djulvkeklkkuahmmsc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7YMvWSaYY8PNqE0bNRdzinQY0TGxXvbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871131262900-t0t9vihl3v6qe9djulvkeklkkuahmmsc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
