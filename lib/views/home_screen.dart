@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../controller/food_controller.dart';
-import '../models/food_item_model.dart';
+import '../controller/food_controller.dart'; 
+import '../models/food_item_model.dart';  
+import 'food_section.dart';         
 
 class HomeScreen extends StatelessWidget{
   HomeScreen({super.key});
@@ -38,12 +39,41 @@ class HomeScreen extends StatelessWidget{
             final foodDocs = snapshot.data!.docs;
             final List<FoodItem> allItems = foodDocs.map((doc) => FoodItem.fromFirestore(doc)).toList();
 
-            return ListView(
-              children: [
-                
-              ],
+            //handle grouping 
+            final Map<FoodType, List<FoodItem>> groupedItems = {};
+            for (var item in allItems){
+              if (groupedItems[item.type] == null){
+                groupedItems[item.type] = [];
+              }
+              groupedItems[item.type]!.add(item);
+            }
+
+            final sortedKeys = groupedItems.keys.toList()
+              ..sort((a, b) => a.index.compareTo(b.index));
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: sortedKeys.length,
+              itemBuilder: (context, index){
+                final type = sortedKeys[index];
+                final items = groupedItems[type]!;
+                final color = _foodtypeColor[type] ?? Colors.grey; 
+                final title = type.name[0].toUpperCase() + type.name.substring(1);
+
+                return FoodSection(
+                  title: title,
+                  items: items,
+                  color: color
+                  );
+              },
             );
           }),
+          floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // TODO: Buat navigasi ke halaman tambah item
+        },
+        child: const Icon(Icons.add),
+      ),
       );
   }
 }
