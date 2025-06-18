@@ -14,6 +14,7 @@ dependencies:
   firebase_auth: ^5.5.1
   image_picker: ^1.1.2 # Versi bisa berubah, gunakan versi terbaru
   provider: ^6.1.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

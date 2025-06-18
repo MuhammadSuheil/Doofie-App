@@ -64,4 +64,12 @@ class FoodController {
           print("Error updating food: $e");
       }
   }
+
+  Future<void> deleteFood(String id) async{
+    try {
+      await _foodCollection.doc(id).delete();
+    } catch (e){
+        print("Error deleting food");
+    }
+  }
 }
