@@ -51,7 +51,7 @@ class FoodController {
     try{
       final String fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
 
-      await _supabase.storage.from('food_images').upload(
+      await _supabase.storage.from('food-images').upload(
             fileName,
             imageFile,
             fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
