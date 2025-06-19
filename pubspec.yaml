@@ -15,6 +15,7 @@ dependencies:
   image_picker: ^1.1.2 # Versi bisa berubah, gunakan versi terbaru
   provider: ^6.1.2
   intl: ^0.19.0
+  supabase_flutter: ^2.5.3
 
 dev_dependencies:
   flutter_test:

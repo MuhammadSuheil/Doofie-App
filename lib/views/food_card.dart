@@ -45,7 +45,7 @@ class FoodCard extends StatelessWidget{
                 topRight: Radius.circular(14.0), 
               ),
               child: Image.network(
-                item.imagePath,
+                item.imageUrl,
                 fit: BoxFit.cover,
 
                 //==HANDLING==
