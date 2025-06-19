@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controller/food_controller.dart'; 
 import '../models/food_item_model.dart';  
 import 'food_section.dart';         
+import 'add_food_screen.dart';
 
 class HomeScreen extends StatelessWidget{
   HomeScreen({super.key});
@@ -71,7 +72,11 @@ class HomeScreen extends StatelessWidget{
           floatingActionButton: FloatingActionButton(
         onPressed: () {
           // TODO: Buat navigasi ke halaman tambah item
+          Navigator.push(context,
+           MaterialPageRoute(builder: (context) => const AddFoodScreen())
+           );
         },
+        tooltip: 'Add Food',
         child: const Icon(Icons.add),
       ),
       );
