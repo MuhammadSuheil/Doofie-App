@@ -56,7 +56,7 @@ class FoodController {
             imageFile,
             fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
           );
-      final String publicUrl = _supabase.storage.from('food_images').getPublicUrl(fileName);
+      final String publicUrl = _supabase.storage.from('food-images').getPublicUrl(fileName);
       
       return publicUrl;
     } catch (e) {
