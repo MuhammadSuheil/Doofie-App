@@ -22,7 +22,7 @@ class FoodItem {
     return FoodItem(
       id: snapshot.id,
       name: data['name'],
-      imageUrl: data['imagePath'],
+      imageUrl: data['imageUrl'] ?? '',
       type: FoodType.values.firstWhere((e) => e.name == data['type']),
       expiryDate: (data['expiryDate'] as Timestamp).toDate(),
     );  
@@ -31,7 +31,7 @@ class FoodItem {
   Map<String, dynamic> toMap() {
     return{
       'name': name,
-      'imagePath': imageUrl,
+      'imageUrl': imageUrl,
       'type': type.name,
       'expiryDate': Timestamp.fromDate(expiryDate),
     };
