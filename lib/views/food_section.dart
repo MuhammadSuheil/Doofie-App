@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import '../models/food_item_model.dart'; 
+import '../controller/food_controller.dart';
 import 'food_card.dart';
 
 class FoodSection extends StatelessWidget{
   final String title;
   final List<FoodItem> items;
   final Color color;
+  final FoodController controller;
 
   const FoodSection({
     super.key,
     required this.title,
     required this.items,
     required this.color,
+    required this.controller,
   });
 
   @override
@@ -45,9 +48,37 @@ class FoodSection extends StatelessWidget{
             scrollDirection: Axis.horizontal,
             itemCount: items.length,
             itemBuilder: (context, index){
+              final item = items[index];
               return FoodCard(
                 item: items[index],
-                borderColor: color.withOpacity(0.5));
+                borderColor: color.withOpacity(0.5),
+                onLongPress: (){
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext dialogContext){
+                      return AlertDialog(
+                        title: const Text('Confirm Delete?'),
+                        content: Text('Want to delete "${item.name}"?'),
+                        actions: [
+                          TextButton(
+                             child: const Text('Cancel'),
+                              onPressed: (){
+                                Navigator.of(dialogContext).pop();
+                              },
+                          ),
+                          TextButton(
+                           child: const Text('Delete'),
+                           style: TextButton.styleFrom(foregroundColor: Colors.red.shade900),
+                           onPressed: (){
+                            controller.deleteFood(item.id);
+                            Navigator.of(dialogContext).pop();
+                           },
+                           )
+                        ],
+                      );
+                    });
+                }
+                );
             },
           ),
         )

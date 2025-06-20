@@ -64,7 +64,8 @@ class HomeScreen extends StatelessWidget{
                 return FoodSection(
                   title: title,
                   items: items,
-                  color: color
+                  color: color,
+                  controller: _controller,
                   );
               },
             );
