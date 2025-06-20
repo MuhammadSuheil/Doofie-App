@@ -41,12 +41,12 @@ class _MainScreenState extends State<MainScreen>{
           BottomNavigationBarItem(
             icon: Icon(Icons.kitchen_outlined),
             activeIcon: Icon(Icons.kitchen),
-            label: 'Recipe',
+            label: 'Fridge',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             activeIcon: Icon(Icons.person),
-            label: 'Recipe',
+            label: 'Profile',
           ),
         ],
       currentIndex: _selectedIndex,

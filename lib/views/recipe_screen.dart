@@ -8,7 +8,9 @@ class RecipeScreen extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kumpulan Resep'),
+        title: Center(
+          child: Text('Recipe', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),),
+        ),
       ),
       body: const Center(
         child: Text(
