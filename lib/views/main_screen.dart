@@ -27,6 +27,32 @@ class _MainScreenState extends State<MainScreen>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex), 
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt_long_outlined),
+            activeIcon: Icon(Icons.receipt_long),
+            label: 'Recipe',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.kitchen_outlined),
+            activeIcon: Icon(Icons.kitchen),
+            label: 'Recipe',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: 'Recipe',
+          ),
+        ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.green,  
+      onTap: _onItemTapped,
+      ),
+    );
   }
 }
