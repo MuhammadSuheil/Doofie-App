@@ -6,13 +6,13 @@ import '../models/food_item_model.dart';
 
 class FoodCard extends StatelessWidget{
   final FoodItem item;
-  final Color borderColor;
+  final Color cardColor;
   final VoidCallback onLongPress;
 
   const FoodCard({
     super.key,
     required this.item,
-    required this.borderColor,
+    required this.cardColor,
     required this.onLongPress,
   });
   
@@ -26,9 +26,9 @@ class FoodCard extends StatelessWidget{
         width: 150,
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: borderColor, width: 4),
+          color: cardColor,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: cardColor, width: 2),
         ),
         //image
         child: Column(
@@ -38,8 +38,8 @@ class FoodCard extends StatelessWidget{
               flex: 3,
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(14.0),
-                  topRight: Radius.circular(14.0), 
+                  topLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0), 
                 ),
                 child: Image.network(
                   item.imageUrl,
@@ -65,7 +65,8 @@ class FoodCard extends StatelessWidget{
                       Text(
                         item.name,
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16
+                          fontWeight: FontWeight.bold, fontSize: 16,
+                          color: Colors.white,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -74,7 +75,7 @@ class FoodCard extends StatelessWidget{
                       Text(
                         'Exp Date: ${DateFormat('dd - MM - yy').format(item.expiryDate)}',
                         style: TextStyle(
-                          color: Colors.grey.shade700, fontSize: 12),
+                          color: Colors.white.withOpacity(0.8), fontSize: 12),
                       )
                     ],
                   ),))

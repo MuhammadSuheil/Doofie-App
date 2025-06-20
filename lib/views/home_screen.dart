@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
 
   final Map<FoodType, Color> _foodtypeColor = {
     FoodType.veggies: Colors.green.shade600,
-    FoodType.meat: Colors.red.shade400,
+    FoodType.meat: const Color.fromARGB(255, 203, 21, 18),
     FoodType.fruit: Colors.amberAccent,
   };
 

@@ -51,7 +51,7 @@ class FoodSection extends StatelessWidget{
               final item = items[index];
               return FoodCard(
                 item: items[index],
-                borderColor: color.withOpacity(0.5),
+                cardColor: color,
                 onLongPress: (){
                   showDialog(
                     context: context,
