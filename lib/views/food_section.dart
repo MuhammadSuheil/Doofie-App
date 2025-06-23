@@ -57,9 +57,15 @@ class FoodSection extends StatelessWidget{
                     context: context,
                     builder: (BuildContext dialogContext){
                       return AlertDialog(
-                        title: const Text('Confirm Delete?'),
-                        content: Text('Want to delete "${item.name}"?'),
-                        actions: [
+                        title: const Text('Food Option'),
+                        content: Text('What do you want to do on "${item.name}"?'),
+                        actions: <Widget>[
+                          TextButton(
+                            child: const Text('Edit'),
+                            onPressed: (){
+                               Navigator.of(dialogContext).pop();
+                               print('TODO: Navigasi ke halaman Edit');
+                            } ),
                           TextButton(
                              child: const Text('Cancel'),
                               onPressed: (){
