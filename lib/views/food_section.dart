@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/food_item_model.dart'; 
 import '../controller/food_controller.dart';
 import 'food_card.dart';
+import 'add_food_screen.dart';
 
 class FoodSection extends StatelessWidget{
   final String title;
@@ -63,15 +64,14 @@ class FoodSection extends StatelessWidget{
                           TextButton(
                             child: const Text('Edit'),
                             onPressed: (){
-                               Navigator.of(dialogContext).pop();
-                               print('TODO: Navigasi ke halaman Edit');
+                              Navigator.of(dialogContext).pop();
+                              Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddFoodScreen(foodItem: item),
+                              ),
+                            );
                             } ),
-                          TextButton(
-                             child: const Text('Cancel'),
-                              onPressed: (){
-                                Navigator.of(dialogContext).pop();
-                              },
-                          ),
                           TextButton(
                            child: const Text('Delete'),
                            style: TextButton.styleFrom(foregroundColor: Colors.red.shade900),
@@ -79,7 +79,13 @@ class FoodSection extends StatelessWidget{
                             controller.deleteFood(item.id);
                             Navigator.of(dialogContext).pop();
                            },
-                           )
+                           ),
+                          TextButton(
+                             child: const Text('Cancel'),
+                              onPressed: (){
+                                Navigator.of(dialogContext).pop();
+                              },
+                          ),
                         ],
                       );
                     });
