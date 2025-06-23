@@ -4,6 +4,7 @@ import '../models/food_item_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'dart:math';
 import 'dart:io';
+import '../services/notification_service.dart';
 
 class FoodController {
   final CollectionReference _foodCollection =
@@ -38,6 +39,30 @@ class FoodController {
   }) async {
     try{
       final expiryDate = _calculateExpiryDate(type);
+
+      final int notificationId = DateTime.now().millisecondsSinceEpoch % 100000;
+
+      final foodData = {
+      'name': name,
+      'imageUrl': imageUrl,
+      'type': type.name,
+      'expiryDate': Timestamp.fromDate(expiryDate),
+      'notificationId': notificationId, 
+    };
+
+    await _foodCollection.add(foodData);
+
+    final notificationDate = expiryDate.subtract(const Duration(days: 1)).copyWith(hour: 8, minute: 0, second: 0);
+
+    if (notificationDate.isAfter(DateTime.now())) {
+      await NotificationService().scheduleNotification(
+        id: notificationId,
+        title: 'Jangan Sampai Terbuang!',
+        body: 'Bahan makanan "${name}" akan kedaluwarsa besok. Yuk, diolah!',
+        scheduledDate: notificationDate,
+      );
+    }
+
       final tempItem = FoodItem(id: '', name: name, imageUrl: imageUrl, type: type, expiryDate: expiryDate);
 
       await _foodCollection.add(tempItem.toMap());
@@ -88,9 +113,14 @@ class FoodController {
       }
   }
   
-  Future<void> deleteFood(String id) async{
+  Future<void> deleteFood(String id, int? notificationId) async{
     try {
       await _foodCollection.doc(id).delete();
+
+      if (notificationId != null) {
+        await NotificationService().cancelNotification(notificationId);
+      }
+
     } catch (e){
         print("Error deleting food");
     }

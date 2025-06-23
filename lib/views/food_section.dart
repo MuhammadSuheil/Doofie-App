@@ -20,7 +20,6 @@ class FoodSection extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,7 +75,7 @@ class FoodSection extends StatelessWidget{
                            child: const Text('Delete'),
                            style: TextButton.styleFrom(foregroundColor: Colors.red.shade900),
                            onPressed: (){
-                            controller.deleteFood(item.id);
+                            controller.deleteFood(item.id, item.notificationId);
                             Navigator.of(dialogContext).pop();
                            },
                            ),

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 enum FoodType { veggies, fruit, meat }
 
 class FoodItem {
+  final int? notificationId;
   final String id;
   final String name;
   final String imageUrl;
@@ -10,6 +11,7 @@ class FoodItem {
   final DateTime expiryDate;
 
   FoodItem({
+    this.notificationId,
     required this.id,
     required this.name,
     required this.imageUrl,
@@ -25,6 +27,7 @@ class FoodItem {
       imageUrl: data['imageUrl'] ?? '',
       type: FoodType.values.firstWhere((e) => e.name == data['type']),
       expiryDate: (data['expiryDate'] as Timestamp).toDate(),
+      notificationId: data['notificationId'],
     );  
   }
 

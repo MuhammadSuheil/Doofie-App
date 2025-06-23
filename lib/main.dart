@@ -3,9 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '/views/main_screen.dart'; 
+import '/services/notification_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().init(); 
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
