@@ -67,7 +67,7 @@ class FoodSection extends StatelessWidget{
                               Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AddFoodScreen(foodItem: item),
+                                builder: (context) => AddFoodScreen(foodItem: item, controller: controller),
                               ),
                             );
                             } ),

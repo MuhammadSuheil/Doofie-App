@@ -6,22 +6,22 @@ import '../models/food_item_model.dart';
 
 class AddFoodScreen extends StatefulWidget {
   final FoodItem? foodItem;
+  final FoodController controller;
 
   const AddFoodScreen({
     super.key,
-    this.foodItem});
+    this.foodItem,
+    required this.controller});
 
   @override
   State<AddFoodScreen> createState() => _AddFoodScreenState();
 }
 
 class _AddFoodScreenState extends State<AddFoodScreen>{
-  final FoodController _controller = FoodController();
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
 
   File? _selectedImage;
-  // String _itemName = '';
   FoodType? _selectedType;
   bool _isLoading = false;
 
@@ -33,15 +33,17 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
       _nameController.text = widget.foodItem!.name;
       _selectedType = widget.foodItem!.type;
     }
-  }  
+  }   
 
-   @override
+  @override
   void dispose() {
     _nameController.dispose();
     super.dispose();
   }
 
   Future<void> _pickImage() async {
+    if (_isLoading) return;
+
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.camera, imageQuality: 50);
 
@@ -52,72 +54,74 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
     }
   }
 
+  //DEBUGG
   Future<void> _saveFood() async {
-    if (!_formKey.currentState!.validate()) return;
+  print("--- [1] FUNGSI _saveFood MULAI DIJALANKAN. Kondisi _isLoading: $_isLoading ---");
 
-    if (_selectedImage == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Silakan ambil gambar makanan terlebih dahulu!')),
-      );
-      return;
-    }
-
-    setState(() => _isLoading = true);
-
-    String imageUrl;
-
-    if (_selectedImage != null) {
-      imageUrl = await _controller.uploadImage(_selectedImage!);
-      if (imageUrl.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Gagal meng-upload gambar. Coba lagi.')),
-        );
-        setState(() => _isLoading = false);
-        return;
-    }
-    } else {
-   
-      imageUrl = widget.foodItem?.imageUrl ?? ''; 
-    }
-
-    if (imageUrl.isEmpty) {
-     ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Silakan pilih gambar makanan.')),
-      );
-      setState(() => _isLoading = false);
-      return;
-    }
-
-    if (widget.foodItem == null) {
-      await _controller.addFood(
-        name: _nameController.text,
-        type: _selectedType!,
-        imageUrl: imageUrl,
-      );
-    } else {
-      await _controller.updateFood(
-        id: widget.foodItem!.id, 
-        name: _nameController.text,
-        type: _selectedType!,
-        imageUrl: imageUrl,
-      );
-    }
-
-    setState(() => _isLoading = false);
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Makanan berhasil disimpan!')),
-      );
-      Navigator.of(context).pop();
-    }
+  if (_isLoading) {
+    print("--- [X] AKSI DIBLOKIR KARENA _isLoading SUDAH TRUE. ---");
+    return;
   }
+
+  if (!_formKey.currentState!.validate()) {
+    print("--- [X] AKSI DIBLOKIR KARENA FORM TIDAK VALID. ---");
+    return;
+  }
+
+  print("--- [2] AKAN MENGUBAH _isLoading MENJADI TRUE... ---");
+  setState(() => _isLoading = true);
+
+  String imageUrl;
+  if (_selectedImage != null) {
+    print("--- [3] MEMULAI UPLOAD GAMBAR BARU... ---");
+    imageUrl = await widget.controller.uploadImage(_selectedImage!);
+    print("--- [4] UPLOAD GAMBAR SELESAI. URL: $imageUrl ---");
+  } else {
+    imageUrl = widget.foodItem?.imageUrl ?? '';
+  }
+
+  if (imageUrl.isEmpty) {
+    print("--- [X] AKSI DIBLOKIR KARENA imageUrl KOSONG. ---");
+    if (mounted) setState(() => _isLoading = false);
+    return;
+  }
+
+  final String name = _nameController.text;
+  final FoodType? type = _selectedType;
+
+  // JEJAK 5: Tepat sebelum data dikirim ke controller.
+  print("--- [5] AKAN MEMANGGIL CONTROLLER UNTUK MENYIMPAN DATA... ---");
+  if (widget.foodItem == null) {
+    await widget.controller.addFood(
+      name: name,
+      type: type!,
+      imageUrl: imageUrl,
+    );
+  } else {
+    await widget.controller.updateFood(
+      id: widget.foodItem!.id,
+      name: name,
+      type: type!,
+      imageUrl: imageUrl,
+    );
+  }
+  print("--- [6] PROSES PENYIMPANAN DI CONTROLLER SELESAI. ---");
+
+  if (mounted) {
+    print("--- [7] NAVIGASI KEMBALI & SELESAI. ---");
+    Navigator.of(context).pop();
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Makanan berhasil disimpan!')),
+    );
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.foodItem == null ? 'Add Food' : 'Edit Food'),
+        title: Text(widget.foodItem == null ? 'Tambah Makanan Baru' : 'Edit Makanan'),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.close),
@@ -140,20 +144,20 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
                     border: Border.all(color: Colors.grey.shade400, style: BorderStyle.solid),
                   ),
                   child: _selectedImage != null
-                    ? Image.file(_selectedImage!, fit: BoxFit.cover) 
-                    : (widget.foodItem?.imageUrl ?? '').isNotEmpty
-                        ? Image.network(widget.foodItem!.imageUrl, fit: BoxFit.cover)
-                    : const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.camera_alt_outlined, size: 50, color: Colors.grey),
-                        SizedBox(height: 8),
-                        Text('Tap to take photo')
-                      ],
-                    ),
+                      ? Image.file(_selectedImage!, fit: BoxFit.cover, width: double.infinity) 
+                      : (widget.foodItem?.imageUrl ?? '').isNotEmpty
+                          ? Image.network(widget.foodItem!.imageUrl, fit: BoxFit.cover, width: double.infinity)
+                      : const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.camera_alt_outlined, size: 50, color: Colors.grey),
+                            SizedBox(height: 8),
+                            Text('Tap to take photo')
+                          ],
+                        ),
                 ),
               ),
-              SizedBox(height: 40,),
+              const SizedBox(height: 40),
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(
@@ -161,7 +165,7 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.label_important_outline),
                 ),
-                validator: (value) => value == null || value.isEmpty ? 'Food Name cannot be empty' : null,
+                validator: (value) => value == null || value.isEmpty ? 'Nama tidak boleh kosong' : null,
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<FoodType>(
@@ -181,11 +185,10 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
                 validator: (value) => value == null ? 'Silakan pilih tipe makanan' : null,
               ),
               const SizedBox(height: 40),
-
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton.icon(
-                      icon: const Icon(Icons.kitchen_outlined, color: Colors.white),
+                      icon: const Icon(Icons.kitchen_outlined, color: Colors.white,),
                       onPressed: _saveFood,
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),

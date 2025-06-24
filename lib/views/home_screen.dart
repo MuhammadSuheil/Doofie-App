@@ -6,9 +6,9 @@ import 'food_section.dart';
 import 'add_food_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  final FoodController controller;
 
-  final FoodController _controller = FoodController();
+  HomeScreen({super.key, required this.controller});
 
   final Map<FoodType, Color> _foodtypeColor = {
     FoodType.veggies: Colors.green.shade600,
@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: _controller.getFoodStream(),
+        stream: controller.getFoodStream(),
         builder: (context, snapshot) {
           //handle waiting
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -73,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                 title: title,
                 items: items,
                 color: color,
-                controller: _controller,
+                controller: controller,
               );
             },
           );
@@ -83,7 +83,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddFoodScreen()));
+              MaterialPageRoute(builder: (context) => AddFoodScreen(controller: controller,)));
         },
         tooltip: 'Add Food',
         shape: const CircleBorder(),

@@ -29,7 +29,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false, 
       title: 'Food Reminder',
-      home: MainScreen(), 
+      home: const MainScreen(), 
     );
   }
 }
