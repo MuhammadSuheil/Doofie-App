@@ -52,8 +52,9 @@ class FoodController {
 
       await newDocument.update({'notificationId': notificationId});
       
-      // final notificationDate = expiryDate.subtract(const Duration(days: 1)).copyWith(hour: 8, minute: 0, second: 0);
-      final notificationDate = DateTime.now().add(const Duration(seconds: 15));
+      final notificationDate = expiryDate.subtract(const Duration(days: 1)).copyWith(hour: 8, minute: 0, second: 0);
+     
+      // final notificationDate = DateTime.now().add(const Duration(seconds: 15));
 
       if (notificationDate.isAfter(DateTime.now())) {
         await NotificationService().scheduleNotification(
