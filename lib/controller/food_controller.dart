@@ -37,38 +37,33 @@ class FoodController {
     required FoodType type,
     required String imageUrl,
   }) async {
-    try{
+  try {
       final expiryDate = _calculateExpiryDate(type);
 
-      final int notificationId = DateTime.now().millisecondsSinceEpoch % 100000;
-
       final foodData = {
-      'name': name,
-      'imageUrl': imageUrl,
-      'type': type.name,
-      'expiryDate': Timestamp.fromDate(expiryDate),
-      'notificationId': notificationId, 
-    };
+        'name': name,
+        'imageUrl': imageUrl,
+        'type': type.name,
+        'expiryDate': Timestamp.fromDate(expiryDate),
+      };
+      DocumentReference newDocument = await _foodCollection.add(foodData);
 
-    await _foodCollection.add(foodData);
+      final int notificationId = newDocument.id.hashCode;
 
-    // final notificationDate = expiryDate.subtract(const Duration(days: 1)).copyWith(hour: 8, minute: 0, second: 0);
-    final notificationDate = DateTime.now().add(const Duration(seconds: 15));
+      await newDocument.update({'notificationId': notificationId});
+      
+      // final notificationDate = expiryDate.subtract(const Duration(days: 1)).copyWith(hour: 8, minute: 0, second: 0);
+      final notificationDate = DateTime.now().add(const Duration(seconds: 15));
 
-    if (notificationDate.isAfter(DateTime.now())) {
-      await NotificationService().scheduleNotification(
-        id: notificationId,
-        title: 'Jangan Sampai Terbuang!',
-        body: 'Bahan makanan "${name}" akan kedaluwarsa besok. Yuk, diolah!',
-        scheduledDate: notificationDate,
-      );
-    }
-
-      final tempItem = FoodItem(id: '', name: name, imageUrl: imageUrl, type: type, expiryDate: expiryDate);
-
-      await _foodCollection.add(tempItem.toMap());
-    }
-    catch(e){
+      if (notificationDate.isAfter(DateTime.now())) {
+        await NotificationService().scheduleNotification(
+          id: notificationId,
+          title: 'Dont let it go to waste!',
+          body: 'Food "$name" is going to expire soon. Come and make something with it!',
+          scheduledDate: notificationDate,
+        );
+      }
+    } catch (e) {
       print("Error adding food: $e");
     }
   }

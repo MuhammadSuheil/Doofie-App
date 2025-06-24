@@ -56,32 +56,24 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
 
   //DEBUGG
   Future<void> _saveFood() async {
-  print("--- [1] FUNGSI _saveFood MULAI DIJALANKAN. Kondisi _isLoading: $_isLoading ---");
-
   if (_isLoading) {
-    print("--- [X] AKSI DIBLOKIR KARENA _isLoading SUDAH TRUE. ---");
     return;
   }
 
   if (!_formKey.currentState!.validate()) {
-    print("--- [X] AKSI DIBLOKIR KARENA FORM TIDAK VALID. ---");
     return;
   }
 
-  print("--- [2] AKAN MENGUBAH _isLoading MENJADI TRUE... ---");
   setState(() => _isLoading = true);
 
   String imageUrl;
   if (_selectedImage != null) {
-    print("--- [3] MEMULAI UPLOAD GAMBAR BARU... ---");
     imageUrl = await widget.controller.uploadImage(_selectedImage!);
-    print("--- [4] UPLOAD GAMBAR SELESAI. URL: $imageUrl ---");
   } else {
     imageUrl = widget.foodItem?.imageUrl ?? '';
   }
 
   if (imageUrl.isEmpty) {
-    print("--- [X] AKSI DIBLOKIR KARENA imageUrl KOSONG. ---");
     if (mounted) setState(() => _isLoading = false);
     return;
   }
@@ -89,8 +81,6 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
   final String name = _nameController.text;
   final FoodType? type = _selectedType;
 
-  // JEJAK 5: Tepat sebelum data dikirim ke controller.
-  print("--- [5] AKAN MEMANGGIL CONTROLLER UNTUK MENYIMPAN DATA... ---");
   if (widget.foodItem == null) {
     await widget.controller.addFood(
       name: name,
@@ -105,10 +95,8 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
       imageUrl: imageUrl,
     );
   }
-  print("--- [6] PROSES PENYIMPANAN DI CONTROLLER SELESAI. ---");
 
   if (mounted) {
-    print("--- [7] NAVIGASI KEMBALI & SELESAI. ---");
     Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Makanan berhasil disimpan!')),
