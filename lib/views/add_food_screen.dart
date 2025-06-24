@@ -185,11 +185,13 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
               _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton.icon(
-                      icon: const Icon(Icons.kitchen_outlined),
+                      icon: const Icon(Icons.kitchen_outlined, color: Colors.white),
                       onPressed: _saveFood,
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
                       ),
                       label: const Text('Simpan ke Kulkas'),
                     ),
