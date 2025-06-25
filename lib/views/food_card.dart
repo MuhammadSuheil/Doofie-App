@@ -21,14 +21,14 @@ class FoodCard extends StatelessWidget{
     //containercard
     return InkWell(
       onLongPress: onLongPress, 
-      borderRadius: BorderRadius.circular(16.0),
+      borderRadius: BorderRadius.circular(12.0),
       child: Container(
-        width: 150,
+        width: 160,
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: cardColor,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: cardColor, width: 2),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: cardColor, width: 5),
         ),
         //image
         child: Column(
@@ -65,7 +65,7 @@ class FoodCard extends StatelessWidget{
                       Text(
                         item.name,
                         style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16,
+                          fontWeight: FontWeight.w900, fontSize: 16,
                           color: Colors.white,
                         ),
                         maxLines: 1,

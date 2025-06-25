@@ -77,6 +77,7 @@ class RecipeCard extends StatelessWidget {
 
                        },
                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(150, 30),
                           backgroundColor: Colors.green,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
