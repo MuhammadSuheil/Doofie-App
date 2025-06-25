@@ -28,8 +28,8 @@ class _MainScreenState extends State<MainScreen>{
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       RecipeScreen(controller: _recipeController),
-      RecipeScreen(controller: _recipeController),
-      HomeScreen(controller: _foodController), 
+      HomeScreen(controller: _foodController),
+      ProfileScreen(),
       const ProfileScreen(),
     ];
     return Scaffold(

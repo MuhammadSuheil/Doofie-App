@@ -26,11 +26,11 @@ class RecipeCard extends StatelessWidget {
           children: [
             Image.network(
               recipe.imageUrl,
-              height: 220,
+              height: 120,
               width: double.infinity,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Container(
-                height: 220,
+                height: 120,
                 color: Colors.grey[200],
                 alignment: Alignment.center,
                 child: const Icon(Icons.restaurant_menu, color: Colors.grey, size: 50),
@@ -38,7 +38,7 @@ class RecipeCard extends StatelessWidget {
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
                 return Container(
-                  height: 220,
+                  height: 120,
                   alignment: Alignment.center,
                   child: CircularProgressIndicator(
                     value: loadingProgress.expectedTotalBytes != null
@@ -61,7 +61,14 @@ class RecipeCard extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    recipe.description,
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 8.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
