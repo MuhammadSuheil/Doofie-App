@@ -28,8 +28,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, 
-      title: 'Food Reminder',
+      title: 'Doofie',
       home: const MainScreen(), 
+
     );
   }
 }

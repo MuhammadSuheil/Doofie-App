@@ -3,6 +3,7 @@ import 'home_screen.dart';
 import 'profile_screen.dart';
 import 'recipe_screen.dart';
 import '../controller/food_controller.dart'; 
+import '../controller/recipe_controller.dart';
 
 class MainScreen extends StatefulWidget{
   const MainScreen ({super.key});
@@ -14,14 +15,9 @@ class MainScreen extends StatefulWidget{
 class _MainScreenState extends State<MainScreen>{
   int _selectedIndex = 1;
 
-  // 2. BUAT CONTROLLER DI SINI, HANYA SATU KALI SAAT STATE DIBUAT
   final FoodController _foodController = FoodController();
+  final RecipeController _recipeController = RecipeController();
 
-
-  // 3. UBAH LIST HALAMAN AGAR MENERIMA CONTROLLER
-  // late final List<Widget> _widgetOptions;
-
-  
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -31,12 +27,11 @@ class _MainScreenState extends State<MainScreen>{
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      const RecipeScreen(),
-      // Oper instance controller yang sama ke HomeScreen
+      RecipeScreen(controller: _recipeController),
+      RecipeScreen(controller: _recipeController),
       HomeScreen(controller: _foodController), 
       const ProfileScreen(),
     ];
-    // TODO: implement build
     return Scaffold(
       body: Center(
         child: pages.elementAt(_selectedIndex), 
