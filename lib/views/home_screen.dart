@@ -19,6 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
         title: Center(
           child: Text('Fridge', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),),
@@ -69,11 +70,24 @@ class HomeScreen extends StatelessWidget {
               final title =
                   type.name[0].toUpperCase() + type.name.substring(1);
 
-              return FoodSection(
-                title: title,
-                items: items,
-                color: color,
-                controller: controller,
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  FoodSection(
+                    title: title,
+                    items: items,
+                    color: color,
+                    controller: controller,
+                  ),
+                  if (index < sortedKeys.length - 1)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 12.0), // Beri sedikit jarak
+                      child: Divider(
+                        color: const Color.fromARGB(255, 164, 164, 164), // Warna abu-abu sangat terang
+                        thickness: 1.0, // Ketebalan garis
+                      ),
+                    ),
+                ],
               );
             },
           );

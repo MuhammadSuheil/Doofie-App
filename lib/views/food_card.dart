@@ -29,6 +29,14 @@ class FoodCard extends StatelessWidget{
           color: cardColor,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: cardColor, width: 5),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.15), // Warna bayangan
+              spreadRadius: 1, // Seberapa menyebar
+              blurRadius: 2,   // Seberapa kabur
+              offset: Offset(0, 6), // Posisi bayangan (x, y)
+            ),
+          ],
         ),
         //image
         child: Column(
