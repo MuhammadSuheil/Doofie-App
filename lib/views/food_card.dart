@@ -22,7 +22,7 @@ class FoodCard extends StatelessWidget{
       onLongPress: onLongPress, 
       borderRadius: BorderRadius.circular(12.0),
       child: Container(
-        width: 180,
+        width: 160,
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: cardColor,
@@ -82,7 +82,7 @@ class FoodCard extends StatelessWidget{
                       Text(
                         'Exp Date: ${DateFormat('dd - MM - yy').format(item.expiryDate)}',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.8), fontSize: 12),
+                          color: Colors.white.withOpacity(0.8), fontSize: 11),
                       )
                     ],
                   ),))
