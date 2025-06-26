@@ -12,6 +12,7 @@ dependencies:
   firebase_core: ^3.12.1
   cloud_firestore: ^5.6.5
   firebase_auth: ^5.5.1
+  google_sign_in: ^6.2.1  
   image_picker: ^1.1.2 # Versi bisa berubah, gunakan versi terbaru
   provider: ^6.1.2
   intl: ^0.19.0
