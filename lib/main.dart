@@ -4,6 +4,7 @@ import 'firebase_options.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '/views/main_screen.dart'; 
 import '/services/notification_service.dart';
+import '/views/auth/auth_wrapper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +42,7 @@ class MainApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false, 
       title: 'Doofie',
-      home: const MainScreen(), 
+      home: const AuthWrapper(), 
 
     );
   }
