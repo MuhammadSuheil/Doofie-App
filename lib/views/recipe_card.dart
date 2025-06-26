@@ -124,13 +124,6 @@ class RecipeCard extends StatelessWidget {
                               );
                         }),
                       IconButton(
-                       onPressed: (){
-
-                       },
-                       icon: const Icon(Icons.bookmark_border_outlined),
-                       tooltip: 'Save Recipe',
-                      ),
-                      IconButton(
                         onPressed: (){
 
                         },
@@ -158,39 +151,43 @@ class RecipeCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          child: Container(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min, 
-              children: [
-                Image.asset('assets/images/check.png', height: 100),
-                const SizedBox(height: 24),
-                const Text(
-                  'Recipe is Saved!',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  "Don't forget to check it out!",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.grey.shade600),
-                ),
-                const SizedBox(height: 24),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: const Text('Continue'),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Container(
+              color: Colors.white,
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min, 
+                children: [
+                  Image.asset('assets/images/check.png', height: 100),
+                  const SizedBox(height: 24),
+                  const Text(
+                    'Recipe is Saved!',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
-                )
-              ],
+                  const SizedBox(height: 8),
+                  Text(
+                    "Don't forget to check it out!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.grey.shade600),
+                  ),
+                  const SizedBox(height: 24),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text('Continue'),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );

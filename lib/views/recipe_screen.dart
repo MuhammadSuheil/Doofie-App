@@ -78,7 +78,7 @@ class _RecipeScreenState extends State<RecipeScreen> {
                     itemCount: filteredRecipes.length,
                     itemBuilder: (context, index) {
                       final recipe = filteredRecipes[index];
-                      return RecipeCard(recipe: recipe);
+                      return RecipeCard(recipe: recipe, controller: widget.controller);
                     },
                   );
                   

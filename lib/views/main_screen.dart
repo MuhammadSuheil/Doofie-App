@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     final List<Widget> pages = [
       RecipeScreen(controller: _recipeController),
       HomeScreen(controller: _foodController),
-      ProfileScreen(),
+      ProfileScreen(controller: _recipeController),
     ];
 
     return Scaffold(
