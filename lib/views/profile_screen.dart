@@ -30,7 +30,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
-  // Fungsi untuk menampilkan menu dari tombol slider/hamburger
   void _showProfileMenu() {
     showModalBottomSheet(
       context: context,
@@ -62,7 +61,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Kita hapus AppBar bawaan untuk membuat header kustom
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder<UserModel?>(
@@ -92,10 +90,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             
             final user = snapshot.data!;
 
-            // Layout utama halaman profil
             return ListView(
               children: [
-                // --- Header Profil Kustom ---
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Row(
@@ -136,7 +132,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
-                // --- Bio Pengguna ---
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Text(
@@ -148,7 +143,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 24),
                 const Divider(height: 1),
 
-                // --- Judul "Saved Recipes" ---
                 const Padding(
                   padding: EdgeInsets.all(16.0),
                   child: Text(
@@ -157,7 +151,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
 
-                // --- Grid untuk Resep yang Disimpan ---
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   // TODO: Ganti placeholder ini dengan GridView.builder yang menampilkan resep asli
