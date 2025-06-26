@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; 
 import '../models/food_item_model.dart';
@@ -23,7 +22,7 @@ class FoodCard extends StatelessWidget{
       onLongPress: onLongPress, 
       borderRadius: BorderRadius.circular(12.0),
       child: Container(
-        width: 160,
+        width: 180,
         margin: EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: cardColor,

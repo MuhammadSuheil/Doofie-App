@@ -27,6 +27,18 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'Poppins', 
+
+        primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black87,
+          centerTitle: true,
+        ),
+      ),
       debugShowCheckedModeBanner: false, 
       title: 'Doofie',
       home: const MainScreen(), 

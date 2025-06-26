@@ -13,9 +13,8 @@ class RecipeDetailScreen extends StatelessWidget {
     Widget build(BuildContext context) {
         return Scaffold(
             appBar: AppBar(
-                title: Center(
-                    child: Text('Recipe Details', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600),),
-                ),
+                title: Text('Recipe Details', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.w600)),
+                centerTitle: true, 
             ),
             body: SingleChildScrollView(
                 child: Column(
@@ -56,7 +55,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         recipe.name.toUpperCase(),
                                         style: const TextStyle(
                                             fontSize: 28,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w800,
                                             color: Colors.green,
                                         ),
                                     ),
