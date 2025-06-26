@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/recipe_model.dart';
+import 'recipe_detail_screen.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
@@ -8,6 +9,14 @@ class RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void openDetailPage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => RecipeDetailScreen(recipe: recipe),
+        ),
+      );
+    }
     // TODO: implement build
     return Card(
       elevation: 3.0,
@@ -18,9 +27,7 @@ class RecipeCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias, //imageClip
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: (){
-
-        },
+        onTap: openDetailPage,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -73,9 +80,7 @@ class RecipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton(
-                       onPressed: (){
-
-                       },
+                       onPressed: openDetailPage,
                        style: ElevatedButton.styleFrom(
                           fixedSize: const Size(150, 30),
                           backgroundColor: Colors.green,
