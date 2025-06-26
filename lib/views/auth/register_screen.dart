@@ -69,14 +69,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // Logo Aplikasi
                 Image.asset(
                   'assets/images/logo.png', 
                   height: 120, 
                 ),
                 const SizedBox(height: 24),
 
-                // Teks Sambutan
                 const Text(
                   'Create your Account',
                   textAlign: TextAlign.center,
@@ -88,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 const SizedBox(height: 40),
 
                 // Input Nama
-                const Text('Full Name',),
+                const Text('Username',),
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _nameController,
@@ -143,7 +141,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 32),
 
-                // Tombol Daftar
                 _isLoading
                     ? const Center(child: CircularProgressIndicator())
                     : ElevatedButton(
@@ -162,14 +159,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                 const SizedBox(height: 40),
                 
-                // Link ke Halaman Login
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Already have an account?"),
                     TextButton(
                       onPressed: () {
-                         Navigator.of(context).pop(); // Cukup pop untuk kembali ke halaman login
+                         Navigator.of(context).pop(); 
                       },
                       child: const Text('Login'),
                     ),

@@ -40,8 +40,19 @@ class HomeScreen extends StatelessWidget {
           }
           //handle data error
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(
-                child: Text("Kulkas kosong, yuk tambahkan item!"));
+            return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('assets/images/pana.png', height: 120,),
+                    const SizedBox(height: 12,),
+                    const Text("There's nothing in the fridge right now",
+                    style: TextStyle(fontWeight: FontWeight.bold),),
+                    Text("press (+) down below to add food to the fridge")
+                    
+                  ],
+                ),
+                );
           }
           //handle data to list
           final foodDocs = snapshot.data!.docs;

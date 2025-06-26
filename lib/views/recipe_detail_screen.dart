@@ -38,7 +38,7 @@ class RecipeDetailScreen extends StatelessWidget {
                             padding: EdgeInsets.all(16),
                             decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                                // borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                                 boxShadow: [
                                     BoxShadow(
                                         color: Colors.grey,
