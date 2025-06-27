@@ -5,10 +5,9 @@ import '../../controller/recipe_controller.dart';
 import '../../models/recipe_model.dart';
 import '../../models/user_model.dart';
 import 'auth/auth_wrapper.dart';
-import 'recipe_detail_screen.dart'; // Untuk navigasi saat grid di-tap
+import 'recipe_detail_screen.dart'; 
 
 class ProfileScreen extends StatefulWidget {
-  // Terima controller resep
   final RecipeController controller;
   const ProfileScreen({super.key, required this.controller});
 
@@ -47,7 +46,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               title: const Text('Edit Profil'),
               onTap: () {
                 Navigator.pop(context);
-                // TODO: Navigasi ke halaman Edit Profil
                 print('Navigasi ke Edit Profil');
               },
             ),
@@ -72,14 +70,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: FutureBuilder<UserModel?>(
           future: _userDataFuture,
           builder: (context, userSnapshot) {
-            // --- PERBAIKAN UTAMA ADA PADA STRUKTUR LOGIKA INI ---
 
-            // 1. Saat data sedang dimuat
             if (userSnapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            // 2. Jika terjadi error atau tidak ada data (termasuk null)
             if (userSnapshot.hasError || !userSnapshot.hasData) {
               return Center(
                 child: Padding(
@@ -98,11 +93,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               );
             }
 
-            // 3. Jika semua aman, baru kita akses datanya.
-            // Tidak perlu tanda '!' karena sudah di-handle oleh if di atas.
             final user = userSnapshot.data!;
 
-            // Tampilkan UI utama setelah data berhasil didapatkan
             return NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
@@ -110,7 +102,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // --- Header Profil Kustom ---
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(
@@ -151,7 +142,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ],
                           ),
                         ),
-                        // --- Bio Pengguna ---
                         Padding(
                           padding:
                               const EdgeInsets.symmetric(horizontal: 16.0),
@@ -165,7 +155,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
                         const SizedBox(height: 24),
                         const Divider(height: 1),
-                        // --- Judul "Saved Recipes" ---
                         const Padding(
                           padding: EdgeInsets.all(16.0),
                           child: Text(
@@ -179,7 +168,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ];
               },
-              // --- Grid Resep yang Disimpan ---
               body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
                 stream: widget.controller.getSavedRecipesStream(),
                 builder: (context, recipeSnapshot) {
@@ -212,7 +200,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisCount: 2,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
-                      // Rasio 1:1 (persegi) untuk gambar
                       childAspectRatio: 1.0, 
                     ),
                     itemCount: savedRecipes.length,
@@ -282,11 +269,10 @@ class SavedRecipeTile extends StatelessWidget {
           },
         );
       },
-      // Gunakan Column untuk menata gambar di atas dan teks di bawah
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Gambar menempati sisa ruang
           Expanded(
             child: Card(
               clipBehavior: Clip.antiAlias,
@@ -301,16 +287,14 @@ class SavedRecipeTile extends StatelessWidget {
               ),
             ),
           ),
-          // Beri jarak antara gambar dan teks
           const SizedBox(height: 8),
-          // Teks nama resep
           Text(
             recipe.name,
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
             ),
-            textAlign: TextAlign.center, // Teks di tengah
+            textAlign: TextAlign.center, 
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
