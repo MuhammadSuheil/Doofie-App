@@ -20,11 +20,19 @@ dependencies:
   flutter_local_notifications: ^17.2.1+1
   timezone: ^0.9.4
   flutter_native_splash: ^2.4.6
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_icons:
+  image_path: "assets/images/logo.png"
+  android: true
+  adaptive_icon_background: "#ff1655"
+  adaptive_icon_foreground: "assets/images/android_icon.png"
 
 flutter:
   uses-material-design: true

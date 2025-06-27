@@ -51,6 +51,17 @@ class RecipeController {
         .map((snapshot) => snapshot.exists); 
   }
 
+  Future<bool> isRecipeSaved(String recipeId) async {
+  if (_userId == null) return false;
+  final doc = await _db
+      .collection('users')
+      .doc(_userId)
+      .collection('savedRecipes')
+      .doc(recipeId)
+      .get();
+  return doc.exists;
+}
+
   Stream<QuerySnapshot<Map<String, dynamic>>> getSavedRecipesStream() {
      if (_userId == null) return Stream.empty();
      return _db

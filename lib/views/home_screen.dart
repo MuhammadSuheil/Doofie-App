@@ -92,10 +92,10 @@ class HomeScreen extends StatelessWidget {
                   ),
                   if (index < sortedKeys.length - 1)
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 12.0), // Beri sedikit jarak
+                      padding: const EdgeInsets.symmetric(vertical: 12.0), 
                       child: Divider(
-                        color: const Color.fromARGB(255, 164, 164, 164), // Warna abu-abu sangat terang
-                        thickness: 1.0, // Ketebalan garis
+                        color: const Color.fromARGB(255, 164, 164, 164), 
+                        thickness: 1.0, 
                       ),
                     ),
                 ],

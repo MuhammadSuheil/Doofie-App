@@ -18,7 +18,7 @@ class RecipeCard extends StatelessWidget {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => RecipeDetailScreen(recipe: recipe),
+          builder: (context) => RecipeDetailScreen(recipe: recipe, controller: controller,),
         ),
       );
     }
@@ -127,7 +127,7 @@ class RecipeCard extends StatelessWidget {
                         onPressed: (){
 
                         },
-                        icon: const Icon(Icons.send_outlined),
+                        icon: const Icon(Icons.send_outlined, color:  Colors.grey,),
                         tooltip: 'Share Recipe',
                       ),
                     ],

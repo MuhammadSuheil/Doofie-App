@@ -9,7 +9,7 @@
         android:name="android.permission.USE_EXACT_ALARM" />
 
     <application
-        android:label="doofie"
+        android:label="Doofie"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

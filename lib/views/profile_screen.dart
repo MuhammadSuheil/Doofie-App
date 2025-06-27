@@ -178,7 +178,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   
                   if (recipeSnapshot.hasError) {
                     return Center(
-                      child: Text("Gagal memuat resep: ${recipeSnapshot.error}"),
+                      child: 
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/pana.png', height: 120,),
+                          const SizedBox(height: 12,),
+                          Text("Go save some recipe" ,style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text("your saved recipe will be displayed here")
+                        ],
+                      ),
+                      
+                      
                     );
                   }
 
@@ -240,6 +251,7 @@ class SavedRecipeTile extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => RecipeDetailScreen(
+              controller: controller,
               recipe: recipe),
           ),
         );
