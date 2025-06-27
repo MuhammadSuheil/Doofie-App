@@ -5,19 +5,23 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '/views/main_screen.dart'; 
 import '/services/notification_service.dart';
 import '/views/auth/auth_wrapper.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotificationService().init(); 
+  
+  await dotenv.load(fileName: ".env");
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
   await Supabase.initialize(
-    url: 'https://tyixpruccfjrcaibrhtn.supabase.co',    
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR5aXhwcnVjY2ZqcmNhaWJyaHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAzMzE0OTIsImV4cCI6MjA2NTkwNzQ5Mn0.fSPAeR143HUKsx03L5JETlNRvyuadMfkFH3Ricayjoo', 
+    url: dotenv.env['SUPABASE_URL']!,      
+    anonKey: dotenv.env['SUPABASE_ANON_KEY']!, 
   );
+
 
   runApp(const MainApp());
 }

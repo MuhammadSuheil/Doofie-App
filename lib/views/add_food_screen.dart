@@ -109,7 +109,7 @@ class _AddFoodScreenState extends State<AddFoodScreen>{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.foodItem == null ? 'Tambah Makanan Baru' : 'Edit Makanan'),
+        title: Text(widget.foodItem == null ? 'Add Food' : 'Edit Food',),
         leading: IconButton(
           onPressed: () => Navigator.of(context).pop(),
           icon: const Icon(Icons.close),
