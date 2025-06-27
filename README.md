@@ -126,7 +126,7 @@ This project uses **Firebase Cloud Firestore** as its cloud-based NoSQL database
 
 ## Download The App (APK)
 
-You can download and install the application directly using the APK files provided in the [**Releases Section**](https://github.com/[YOUR_USERNAME]/[YOUR_REPO_NAME]/releases) of this repository.
+You can download and install the application directly using the APK files provided in the [**Releases Section**](https://github.com/MuhammadSuheil/Doofie-App/releases/tag/v1.0%2C0) of this repository.
 
 
 *Crafted with the goal of reducing food waste, one kitchen at a time.*
