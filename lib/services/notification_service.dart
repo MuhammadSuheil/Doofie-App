@@ -47,7 +47,6 @@ class NotificationService {
 
       const NotificationDetails notificationDetails = NotificationDetails(
         android: androidNotificationDetails,
-        // iOS: null (karena kita fokus Android)
       );
 
       final tz.TZDateTime scheduledTZDate =
@@ -67,7 +66,6 @@ class NotificationService {
       print('SUKSES: Notifikasi dengan ID $id untuk "$title" dijadwalkan pada $scheduledTZDate');
   }
 
-  // Kerangka fungsi untuk membatalkan notifikasi
   Future<void> cancelNotification(int id) async {
     await _notificationsPlugin.cancel(id);
     print('Notifikasi dengan id $id dibatalkan.');

@@ -5,7 +5,6 @@ class RecipeController {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Fungsi untuk mendapatkan stream data resep secara real-time
   Stream<QuerySnapshot<Map<String, dynamic>>> getRecipesStream() {
     return _db.collection('recipes').snapshots() as Stream<QuerySnapshot<Map<String, dynamic>>>;
   }
