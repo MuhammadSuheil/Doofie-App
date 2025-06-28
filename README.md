@@ -21,7 +21,6 @@ The Doofie app addresses this challenge by:
 * **Programming Language:** Dart
 * **Database:** Cloud Firestore (Firebase)
 * **File Storage (Images):** Supabase Storage
-* **State Management:** GetX
 * **Local Notifications:** `flutter_local_notifications`
 
 ## Key Features
